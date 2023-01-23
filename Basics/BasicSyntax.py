@@ -112,3 +112,75 @@ print(format_name("Voltaire", ""))
 print(format_name("", ""))
 
 
+# Using loops to control data flow
+x = 0
+while x < 5:
+    print("Not there yet, x= " + str(x))
+    x += 1
+print("x=" + str(x))
+
+
+# Return the sum of all the divisors of a number, without including it
+def sum_divisors(n):
+    total = 0
+    divisor = 1
+    while divisor < n:
+        modulo = n % divisor
+        if modulo == 0:
+            total += divisor
+        divisor += 1
+    return total
+
+
+print(sum_divisors(0))
+print(sum_divisors(3))
+print(sum_divisors(36))
+print(sum_divisors(102))
+
+
+print("For loops")
+for x in range(5):
+    print(x)
+
+
+# Nested for loops
+teams = ['Dragons', 'Wolves', 'Pandas', 'Unicorns']
+for home_team in teams:
+    for away_team in teams:
+        if home_team != away_team:
+            print(home_team + " vs " + away_team)
+
+
+# Calculate a given number's factorial
+def factorial(n):
+    r = 1
+    for f in range(1, (n+1)):
+        r = r * f
+    return r
+
+
+for n in range(0, 10):
+    print(n, factorial(n))
+
+
+# A script that prints the multiples of 7 between 0 and 100, one multiple per line, print only multiples of 7
+for number in range(101):
+    if (number % 7 == 0 and number != 0) or (number == 0):
+        print(number)
+
+
+# recursion in action
+def sum_positive_numbers(n):
+    # The base case is n being smaller than 1
+    if n < 1:
+        return 0
+    # The recursive case is adding this number to
+    # the sum of the numbers smaller than this one.
+    return n + sum_positive_numbers(n-1)
+
+
+print(sum_positive_numbers(3))  # Should be 6
+print(sum_positive_numbers(5))  # Should be 15
+
+for x in range(1, 10, 3):
+    print(x)
