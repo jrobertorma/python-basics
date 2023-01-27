@@ -90,3 +90,28 @@ for index, person in enumerate(winners):
 z = [x for x in range(0, 101) if x % 3 == 0]
 print(z)
 
+
+# Using dictionaries
+d = {}
+print(type(d))  # <class 'dict'>
+file_counts = {"jpg": 10, "txt": 14, "csv": 2, "py": 23}  # {'jpg': 10, 'txt': 14, 'csv': 2, 'py': 23}
+print(file_counts)
+# getting an element of a dictionary by key
+print(file_counts["txt"])  # 14
+# the in keyword can be used in dictionaries too
+print("jpg" in file_counts)  # True
+print("html" in file_counts)  # False
+# adding a new key-value pair
+file_counts["cfg"] = 8
+print(file_counts)  # {'jpg': 10, 'txt': 14, 'csv': 2, 'py': 23, 'cfg': 8}
+# updating an existing key-value pair
+file_counts["csv"] = 17
+print(file_counts)  # {'jpg': 10, 'txt': 14, 'csv': 17, 'py': 23, 'cfg': 8}
+# removing a key-value pair
+del file_counts["cfg"]
+print(file_counts)  # {'jpg': 10, 'txt': 14, 'csv': 17, 'py': 23}
+
+# iterating over dictionaries
+# the .items() method returns a tuple with a key-value pair for every element of the dictionary
+for ext, amount in file_counts.items():
+    print("There are {} files with the .{} extension".format(amount, ext))
