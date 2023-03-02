@@ -86,3 +86,62 @@ print(check_web_address("www@google")) # False
 print(check_web_address("www.Coursera.org")) # True
 print(check_web_address("web-address.com/homepage")) # False
 print(check_web_address("My_Favorite-Blog.US")) # True
+
+# Capturing groups are portions of a regex pattern that are enclosed in parentheses
+# search method returns a tuple of the groups defined by the pattern
+def rearrange_name(name):
+  # every string that matches the pattern will be stored in the match object with a tuple with two items (as there are two groups)
+  result = re.search(r"^(\w*), (\w*)$", name)
+  if result == None:
+    return name
+  return "{} {}".format(result[2], result[1])
+
+name=rearrange_name("Kennedy, John F.")
+print(name)
+
+# Numeric repetition qualifiers let us specify how many matches we want a pattern to have
+# Find every word with five letters within a string
+# \b\b matches word limits at the beginning and end of the pattern to indicate we want full words
+# {5} specifies five characters, findall returns all pattern matches
+print(re.findall(r"\b[a-zA-Z]{5}\b", "A scary ghost appeared")) # Prints ['scary', 'ghost']
+
+#  returns all words that are at least 7 characters.
+def long_words(text):
+  # {7,} from 7 to n, {, 20} up to 20 characters length
+  pattern = r"\w{7,}"
+  result = re.findall(pattern, text)
+  return result
+
+print(long_words("I like to drink coffee in the morning.")) # ['morning']
+print(long_words("I also have a taste for hot chocolate in the afternoon.")) # ['chocolate', 'afternoon']
+print(long_words("I never drink tea late at night.")) # []
+
+# Looks for a number between square brackets followed by ": " and a set of upper case letters
+def extract_pid(log_line):
+    regex = r"\[(\d+)\]: ([A-Z]{1,})"
+    result = re.search(regex, log_line)
+    if result is None:
+        return None
+    return "{} ({})".format(result[1], result[2])
+
+print(extract_pid("July 31 07:51:48 mycomputer bad_process[12345]: ERROR Performing package upgrade")) # 12345 (ERROR)
+print(extract_pid("99 elephants in a [cage]")) # None
+print(extract_pid("A string that also has numbers [34567] but no uppercase message")) # None
+print(extract_pid("July 31 08:08:08 mycomputer new_process[67890]: RUNNING Performing backup")) # 67890 (RUNNING)
+
+# We can use re 's module 'split' method to split strings based on regex
+# We are using capturing groups (the parentheses wraping the expression) so every match 
+# will be included
+print(re.split(r"([.?!])", "One sentence. Another one? And the last one!"))
+
+# The sub method is used for creating new strings by substituting all or part of them 
+# for a different string, similar to the replace string method but using regular 
+# expressions for both the matching and the replacing.
+# Replacing every email address by [REDACTED]
+print(re.sub(r"[\w.%+-]+@[\w.-]+", "[REDACTED]", "Received an email from add@email.com")) # Received an email from [REDACTED]
+
+# We can use regex as the replace argument of sub too
+# \2 \1 means we want to return the second match group followed by the first (OMG)
+print(re.sub(r"^([\w .-]*), ([\w .-]*)$", r"\2 \1", "Lovelace, Ada")) # Ada Lovelace
+
+
