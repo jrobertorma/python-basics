@@ -12,9 +12,9 @@ def logParsing():
             pattern = r"(ticky: )(ERROR|INFO )([\w ]*)(\([\w ]*\))"
             found_log = re.search(pattern, log)
             if found_log:
-                log_type = found_log[2]
-                log_message = found_log[3].strip()
-                log_user = found_log[4].replace('(','').replace(')','')
+                log_type = found_log.group(2)
+                log_message = found_log.group(3).strip()
+                log_user = found_log.group(4).replace('(','').replace(')','')
 
                 if log_type == 'ERROR':
                     if errors.get(log_message):
